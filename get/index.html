@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Get CYFR</title>
+  <meta name="description" content="CYFR, the network for dancers, choreographers, agencies, and studios.">
+  <meta property="og:title" content="CYFR">
+  <meta property="og:description" content="The network for dancers, choreographers, agencies, and studios.">
+  <meta name="theme-color" content="#000000">
+  <!--
+    Shared CYFR profile links and QR codes land here:
+    https://carlinmcqueen.github.io/cyfr-legal/get/?p=<account id>
+    With the app, "Open in CYFR" goes to cyfr://p/<account id> (app/p/[accountId].js).
+    Without it, the TestFlight link below.
+    Published from the cyfr repo's web/get folder to the cyfr-legal repo's get folder.
+  -->
+  <style>
+    :root {
+      --bg: #000000;
+      --text: #ffffff;
+      --muted: #a3a3a3;
+      --card: #111111;
+      --border: #262626;
+      --accent: #a9c1ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+    }
+    main {
+      width: 100%;
+      max-width: 440px;
+      padding: 40px 16px 48px;
+      text-align: center;
+    }
+    .logo { width: 220px; max-width: 70%; height: auto; }
+    h1 { font-size: 22px; margin: 8px 0 6px; }
+    p { color: var(--muted); line-height: 1.5; margin: 0 0 20px; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      margin-top: 16px;
+      text-align: left;
+    }
+    .card h2 { font-size: 15px; margin: 0 0 6px; }
+    .card p { margin: 0 0 14px; font-size: 14px; }
+    .button {
+      display: block;
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 12px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 16px;
+      text-decoration: none;
+    }
+    .primary { background: var(--text); color: var(--bg); }
+    .secondary { border: 1px solid var(--border); color: var(--text); }
+    .hint { font-size: 12px; margin-top: 10px; color: var(--muted); }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <main>
+    <img class="logo" src="cyfr-logo.png" alt="CYFR">
+
+    <section id="profile" hidden>
+      <h1>Someone shared a CYFR profile</h1>
+      <p>Have the app? Open the profile in CYFR. New here? Download CYFR below, then open this link again.</p>
+      <a id="open-in-app" class="button primary" href="#">Open in CYFR</a>
+    </section>
+
+    <section id="welcome">
+      <h1>Get CYFR</h1>
+      <p>The network for dancers, choreographers, agencies, and studios.</p>
+    </section>
+
+    <div id="ios" class="card">
+      <h2>iPhone</h2>
+      <p>CYFR is in beta on TestFlight. Install TestFlight from the App Store if you're asked to, then join the beta.</p>
+      <a class="button secondary" href="https://testflight.apple.com/join/GDeDPkdq">Join the iPhone beta</a>
+    </div>
+
+    <p class="hint">Android coming soon.</p>
+  </main>
+
+  <script>
+    (function () {
+      var accountId = new URLSearchParams(window.location.search).get('p');
+      var isAccountId = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(accountId || '');
+      if (isAccountId) {
+        document.getElementById('profile').hidden = false;
+        document.getElementById('welcome').hidden = true;
+        document.getElementById('open-in-app').href = 'cyfr://p/' + accountId;
+      }
+    })();
+  </script>
+</body>
+</html>
